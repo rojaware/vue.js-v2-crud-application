@@ -5,6 +5,8 @@ Uses vue.js v2.0 and vue-router v2.0
 
 First VueJS application for User management admin page. My first concern is to build front end component with VueJS in order to integrated with Server Side Java application
 
+![ScreenShot](https://github.com/rojaware/vue.js-v2-crud-application)
+
 As existing web application is running on tomcat, I need to find a way to use VueJS to replace existing JQuery and AngularJS codes.
 
 Currently, this application provides:
