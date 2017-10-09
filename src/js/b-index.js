@@ -1,12 +1,12 @@
 
 var users = [
-            {  name: "John", fullName: "John Doe", role: "gcm-user" },
-            {  name: "Jane", fullName: "Jane Hello", role: "gcm-admin" },
-            {  name: "Susan", fullName: "Susan Kim", role: "gcm-fo" },
-            {  name: "Chris", fullName: "Chris Cho", role: "petr-it-admin" },
-            {  name: "Dan", fullName: "Dan Paddock", role: "petr-it-security" }
+            { id: 1, name: "John", fullName: "John Doe", role: "gcm-user" },
+            { id: 2, name: "Jane", fullName: "Jane Hello", role: "gcm-admin" },
+            { id: 3, name: "Susan", fullName: "Susan Kim", role: "gcm-fo" },
+            { id: 4, name: "Chris", fullName: "Chris Cho", role: "petr-it-admin" },
+            { id: 5, name: "Dan", fullName: "Dan Paddock", role: "petr-it-security" }
         ];
-const roles = ['Choose', 'gcm-user', 'gcm-admin', 'petr-it-security', 'petr-it-admin', 'gcm-fo'];
+const roles = ['Choose', 'gcm-user', 'gcm-admin', 'gcm-fo','gcm-maanger','petr-it-security', 'petr-it-admin', 'gcm-fo'];
                 
 var message = 'You loaded this page on ' + new Date().toLocaleString() ;
 
@@ -56,7 +56,7 @@ var UserEdit = Vue.extend({
       var user = this.user;
 
       users[findUserKey(user.name)] = {
-        // id: user.id,
+        id: user.id,
         name: user.name,
         fullName: user.fullName,
         role: user.role
@@ -90,7 +90,7 @@ var AddUser = Vue.extend({
     createUser: function() {
       var user = this.user;
       users.push({
-        // id: Math.random().toString().split('.')[1],
+        id: Math.random().toString().split('.')[1],
         name: user.name,
         fullName: user.fullName,
         role: user.role

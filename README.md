@@ -11,8 +11,14 @@ As existing web application is running on tomcat, I need to find a way to use Vu
 
 Currently, this application provides:
 
-* CRUD function for user
-* Search filter by text input
+- CRUD function for user
+- Search filter by text input
+
+### TODO
+
+- Integrated Spring Java CRUD
+- Add Report
+- Add Navigation Bar
 
 ### Usage
  - clone or download zip of this repo
