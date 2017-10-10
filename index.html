@@ -92,7 +92,7 @@
           <option v-for="costCentre in costCentres">{{ costCentre }}</option>
       </select>
     </div>
-    <div class="form-group">
+    <div class="form-group" v-if="user.role === 'gcm-fo'">
       <label for="add-policyIds">Policy ID</label>
       <li v-for="policyId in globalPolicyIds" style="list-style-type:none" >
         <input type="checkbox" :value="policyId" id="add-policyIds" v-model="user.policyIds" > {{policyId}}
@@ -148,7 +148,7 @@
           <option v-for="costCentre in costCentres">{{ costCentre }}</option>
       </select>
     </div>
-    <div class="form-group">
+    <div class="form-group"  v-if="user.role === 'gcm-fo'">
       <label for="edit-policyIds">Policy ID:</label>
 
       <li v-for="policyId in globalPolicyIds" style="list-style-type:none" >

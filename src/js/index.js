@@ -9,12 +9,13 @@ var users = [
         ];
 const roles = ['Choose', 'gcm-user', 'gcm-admin', 'petr-it-security', 'petr-it-admin', 'gcm-fo'];
 const costCentres = ["Choose","3311", "1234", "1122"];  
-const globalPolicyIds = ["CA", "US","UK","SG", "IE","JP","HK"];  
+const globalPolicyIds = ["N/A", "CA", "US","UK","SG", "IE","JP","HK"];  
 
 var message = 'You loaded this page on ' + new Date().toLocaleString() ;
 
 function findUser (name) {
-  return users[findUserKey(name)];
+  var thisUser = users[findUserKey(name)];
+  return thisUser;
 };
 
 function findUserKey (name) {
@@ -36,6 +37,16 @@ var List = Vue.extend({
     console.log()
 
     return self.users.filter(user => {
+       if (user.role !== 'gcm-fo') {
+          user.policyIds = ["N/A"] 
+       } else {
+          var i = user.policyIds.indexOf("N/A");
+          if (i != -1) {
+            user.policyIds.splice(i,1);  
+          }
+          
+       }
+       
        return user.name.toLowerCase().indexOf(self.searchKey.toLowerCase()) > -1
     })
   }
