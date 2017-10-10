@@ -43,3 +43,10 @@ npm install -g http-server
 http-server .
 That allows you to test your build files locally.
 
+### Multi Select
+One of input is multiple selection. You can install it from npm 
+npm install vue-multiselect --save
+Or
+include CDN
+<script src="https://unpkg.com/vue-multiselect@2.0.0"></script>
+<link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.0.0/dist/vue-multiselect.min.css">

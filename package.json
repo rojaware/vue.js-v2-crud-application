@@ -6,16 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "MKuznetcov",
+  "author": "Scott Lee",
   "license": "ISC",
   "dependencies": {
     "jquery": "^3.1.1",
     "lodash": "^4.16.6",
-    "vue": "^2.0.0",
+    "vue": "^2.4.4",
+    "vue-multiselect": "^2.0.3",
     "vue-router": "^2.0.0",
     "vue-server-renderer": "^2.0.5"
   },
-  "devDependencies" : {
-        "vue-migration-helper": "^1.1.1"
+  "devDependencies": {
+    "vue-migration-helper": "^1.1.1"
   }
 }

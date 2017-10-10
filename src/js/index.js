@@ -1,13 +1,16 @@
+// import Multiselect from 'vue-multiselect'
 
 var users = [
-            {  name: "John", fullName: "John Doe", role: "gcm-user" },
-            {  name: "Jane", fullName: "Jane Hello", role: "gcm-admin" },
-            {  name: "Susan", fullName: "Susan Kim", role: "gcm-fo" },
-            {  name: "Chris", fullName: "Chris Cho", role: "petr-it-admin" },
-            {  name: "Dan", fullName: "Dan Paddock", role: "petr-it-security" }
+            {  name: "John", fullName: "John Doe", role: "gcm-user" , costCentre: "3311", policyId: "CA" },
+            {  name: "Jane", fullName: "Jane Hello", role: "gcm-admin" , costCentre: "3311", policyId: "CA" },
+            {  name: "Susan", fullName: "Susan Kim", role: "gcm-fo" , costCentre: "3311", policyId: "CA" },
+            {  name: "Chris", fullName: "Chris Cho", role: "petr-it-admin" , costCentre: "3311", policyId: "CA" },
+            {  name: "Dan", fullName: "Dan Paddock", role: "petr-it-security" , costCentre: "3311", policyId: "CA" }
         ];
 const roles = ['Choose', 'gcm-user', 'gcm-admin', 'petr-it-security', 'petr-it-admin', 'gcm-fo'];
-                
+const costCentres = ["Choose","3311", "1234", "1122"];  
+const policyIds = ["CA", "US", "SG", "HK","UK"];  
+
 var message = 'You loaded this page on ' + new Date().toLocaleString() ;
 
 function findUser (name) {
@@ -49,7 +52,7 @@ var User = Vue.extend({
 var UserEdit = Vue.extend({
   template: '#user-edit',
   data: function () {
-    return {user: findUser(this.$route.params.user_name) , roles: roles};
+    return {user: findUser(this.$route.params.user_name) , roles: roles,  costCentres: costCentres, policyIds: policyIds };
   },
   methods: {
     updateUser: function () {
@@ -59,7 +62,9 @@ var UserEdit = Vue.extend({
         // id: user.id,
         name: user.name,
         fullName: user.fullName,
-        role: user.role
+        role: user.role,
+        costCentre: user.costCentre,
+        policyId: user.policyId,
       };
       router.push('/');
       message = user.name + '('+ user.fullName +') has been mapped to ' + user.role + ' on ' + new Date().toLocaleString() ;
@@ -84,7 +89,7 @@ var UserDelete = Vue.extend({
 var AddUser = Vue.extend({
   template: '#add-user',
   data: function () {
-    return {user: {name: '', fullName: '', role: 'Choose'}, roles: roles }
+    return {user: {name: '', fullName: '', role: 'Choose', costCentre: 'Choose', policyId: ''}, roles: roles, costCentres: costCentres, policyIds: policyIds }
   },
   methods: {
     createUser: function() {
@@ -93,7 +98,9 @@ var AddUser = Vue.extend({
         // id: Math.random().toString().split('.')[1],
         name: user.name,
         fullName: user.fullName,
-        role: user.role
+        role: user.role, 
+        costCentre: user.costCentre,
+        policyId: user.policyId,
       });
       router.push('/');
       message = user.name + '('+ user.fullName +') has been mapped to ' + user.role + ' on ' + new Date().toLocaleString() ;

@@ -9,7 +9,7 @@
   <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css'>
   <link rel="stylesheet" href="src/css/style.css">
 
-
+  <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 </head>
 
 <body>
@@ -44,6 +44,8 @@
       <th>ACF2 Name</th>
       <th>Full Name</th>
       <th>Role</th>
+      <th>Cost Centre</th>
+      <th>Policy ID</th>
       <th class="col-sm-2">Actions</th>
     </tr>
     </thead>
@@ -54,6 +56,8 @@
       </td>
       <td>{{ user.fullName }}</td>
       <td>{{ user.role }}</td>
+      <td>{{ user.costCentre }}</td>
+      <td>{{ user.policyId }}</td>
       <td>
         <router-link class="btn btn-warning btn-xs" :to="{name: 'user-edit', params: {user_name: user.name}}">Edit</router-link>
         <router-link class="btn btn-danger btn-xs" :to="{name: 'user-delete', params: {user_name: user.name}}">Delete</router-link>
@@ -82,6 +86,18 @@
           <option v-for="role in roles">{{ role }}</option>
       </select>
     </div>
+    <div class="form-group">
+      <label for="add-cc">Cost Centre</label>
+      <select id="add-cc" v-model="user.costCentre">
+          <option v-for="costCentre in costCentres">{{ costCentre }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="add-policyId">Policy ID</label>
+      <select id="add-policyId" v-model="user.policyId">
+          <option v-for="policyId in policyIds">{{ policyId }}</option>
+      </select>
+    </div>
     <button type="submit" class="btn btn-primary">Create</button>
     <router-link to="'/'" class="btn btn-default">Cancel</router-link>
   </form>
@@ -94,7 +110,11 @@
   <b>Full Name: </b>
   <div>{{ user.fullName }}</div>
   <b>Role:</b>
-  <div>{{ user.role }}<span class="glyphicon glyphicon-euro"></span></div>
+  <div>{{ user.role }}</div>
+  <b>Cost Centre:</b>
+  <div>{{ user.costCentre }}</div>
+  <b>Policy ID:</b>
+  <div>{{ user.policyId }}</div>
   <br/>
   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
   <router-link to="'/'">Back to user list</router-link>
@@ -119,6 +139,19 @@
           <option v-for="role in roles">{{ role }}</option>
       </select>
     </div>
+    <div class="form-group">
+      <label for="edit-cc">Cost Centre</label>
+      <select id="edit-cc" v-model="user.costCentre">
+          <option v-for="costCentre in costCentres">{{ costCentre }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="edit-policyId">Policy ID</label>
+      <multiselect v-model="user.policyId" :options="policyIds"></multiselect>
+      <!--select id="edit-policyId" v-model="user.policyId">
+          <option v-for="policyId in policyIds">{{ policyId }}</option>
+      </select-->
+    </div>
     <button type="submit" class="btn btn-primary">Save</button>
     <router-link to="'/'" class="btn btn-default">Cancel</router-link>
   </form>
@@ -140,6 +173,5 @@
 <script src='node_modules/vue/dist/vue.js'></script>
 <script src='node_modules/vue-router/dist/vue-router.js'></script>
 <script src="src/js/index.js"></script>
-
 </body>
 </html>
