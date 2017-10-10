@@ -1,15 +1,15 @@
 // import Multiselect from 'vue-multiselect'
 
 var users = [
-            {  name: "John", fullName: "John Doe", role: "gcm-user" , costCentre: "3311", policyId: "CA" },
-            {  name: "Jane", fullName: "Jane Hello", role: "gcm-admin" , costCentre: "3311", policyId: "CA" },
-            {  name: "Susan", fullName: "Susan Kim", role: "gcm-fo" , costCentre: "3311", policyId: "CA" },
-            {  name: "Chris", fullName: "Chris Cho", role: "petr-it-admin" , costCentre: "3311", policyId: "CA" },
-            {  name: "Dan", fullName: "Dan Paddock", role: "petr-it-security" , costCentre: "3311", policyId: "CA" }
+            {  name: "John", fullName: "John Doe", role: "gcm-user" , costCentre: "3311", policyIds: ["CA"] },
+            {  name: "Jane", fullName: "Jane Hello", role: "gcm-admin" , costCentre: "3311", policyIds: ["CA"] },
+            {  name: "Susan", fullName: "Susan Kim", role: "gcm-fo" , costCentre: "3311", policyIds: ["CA"] },
+            {  name: "Chris", fullName: "Chris Cho", role: "petr-it-admin" , costCentre: "3311", policyIds: ["CA"] },
+            {  name: "Dan", fullName: "Dan Paddock", role: "petr-it-security" , costCentre: "3311", policyIds: ["CA"] }
         ];
 const roles = ['Choose', 'gcm-user', 'gcm-admin', 'petr-it-security', 'petr-it-admin', 'gcm-fo'];
 const costCentres = ["Choose","3311", "1234", "1122"];  
-const policyIds = ["CA", "US", "SG", "HK","UK"];  
+const globalPolicyIds = ["CA", "US","UK","SG", "IE","JP","HK"];  
 
 var message = 'You loaded this page on ' + new Date().toLocaleString() ;
 
@@ -52,7 +52,7 @@ var User = Vue.extend({
 var UserEdit = Vue.extend({
   template: '#user-edit',
   data: function () {
-    return {user: findUser(this.$route.params.user_name) , roles: roles,  costCentres: costCentres, policyIds: policyIds };
+    return {user: findUser(this.$route.params.user_name) , roles: roles,  costCentres: costCentres, globalPolicyIds: globalPolicyIds };
   },
   methods: {
     updateUser: function () {
@@ -64,12 +64,13 @@ var UserEdit = Vue.extend({
         fullName: user.fullName,
         role: user.role,
         costCentre: user.costCentre,
-        policyId: user.policyId,
+        policyIds: user.policyIds,
       };
       router.push('/');
       message = user.name + '('+ user.fullName +') has been mapped to ' + user.role + ' on ' + new Date().toLocaleString() ;
     }
   }
+
 });
 
 var UserDelete = Vue.extend({
@@ -89,7 +90,7 @@ var UserDelete = Vue.extend({
 var AddUser = Vue.extend({
   template: '#add-user',
   data: function () {
-    return {user: {name: '', fullName: '', role: 'Choose', costCentre: 'Choose', policyId: ''}, roles: roles, costCentres: costCentres, policyIds: policyIds }
+    return {user: {name: '', fullName: '', role: 'Choose', costCentre: 'Choose', policyIds: [] }, roles: roles, costCentres: costCentres, globalPolicyIds: globalPolicyIds }
   },
   methods: {
     createUser: function() {
@@ -100,7 +101,7 @@ var AddUser = Vue.extend({
         fullName: user.fullName,
         role: user.role, 
         costCentre: user.costCentre,
-        policyId: user.policyId,
+        policyIds: user.policyIds,
       });
       router.push('/');
       message = user.name + '('+ user.fullName +') has been mapped to ' + user.role + ' on ' + new Date().toLocaleString() ;

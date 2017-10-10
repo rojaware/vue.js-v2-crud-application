@@ -9,7 +9,7 @@
   <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css'>
   <link rel="stylesheet" href="src/css/style.css">
 
-  <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+  
 </head>
 
 <body>
@@ -57,7 +57,7 @@
       <td>{{ user.fullName }}</td>
       <td>{{ user.role }}</td>
       <td>{{ user.costCentre }}</td>
-      <td>{{ user.policyId }}</td>
+      <td>{{ user.policyIds }}</td>
       <td>
         <router-link class="btn btn-warning btn-xs" :to="{name: 'user-edit', params: {user_name: user.name}}">Edit</router-link>
         <router-link class="btn btn-danger btn-xs" :to="{name: 'user-delete', params: {user_name: user.name}}">Delete</router-link>
@@ -78,11 +78,11 @@
     </div>
     <div class="form-group">
       <label for="add-fullName">Full Name</label>
-      <textarea class="form-control" id="add-fullName" rows="10" v-model="user.fullName"></textarea>
+      <input class="form-control" id="add-fullName" v-model="user.fullName"></textarea>
     </div>
     <div class="form-group">
       <label for="add-role">Role</label>
-      <select id="add-role" v-model="user.role">
+      <select id="add-role" v-model="user.role" required>
           <option v-for="role in roles">{{ role }}</option>
       </select>
     </div>
@@ -93,10 +93,13 @@
       </select>
     </div>
     <div class="form-group">
-      <label for="add-policyId">Policy ID</label>
-      <select id="add-policyId" v-model="user.policyId">
-          <option v-for="policyId in policyIds">{{ policyId }}</option>
-      </select>
+      <label for="add-policyIds">Policy ID</label>
+      <li v-for="policyId in globalPolicyIds" style="list-style-type:none" >
+        <input type="checkbox" :value="policyId" id="add-policyIds" v-model="user.policyIds" > {{policyId}}
+      </li>
+      <br>
+          <span>Checked names: {{ user.policyIds }}</span>
+    </div>
     </div>
     <button type="submit" class="btn btn-primary">Create</button>
     <router-link to="'/'" class="btn btn-default">Cancel</router-link>
@@ -114,7 +117,7 @@
   <b>Cost Centre:</b>
   <div>{{ user.costCentre }}</div>
   <b>Policy ID:</b>
-  <div>{{ user.policyId }}</div>
+  <div>{{ user.policyIds }}</div>
   <br/>
   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
   <router-link to="'/'">Back to user list</router-link>
@@ -131,7 +134,7 @@
     </div>
     <div class="form-group">
       <label for="edit-fullName">Full Name</label>
-      <textarea class="form-control" id="edit-fullName" rows="3" v-model="user.fullName"></textarea>
+      <input class="form-control" id="edit-fullName" v-model="user.fullName"></textarea>
     </div>
     <div class="form-group">
       <label for="edit-role">Role</label>
@@ -146,11 +149,13 @@
       </select>
     </div>
     <div class="form-group">
-      <label for="edit-policyId">Policy ID</label>
-      <multiselect v-model="user.policyId" :options="policyIds"></multiselect>
-      <!--select id="edit-policyId" v-model="user.policyId">
-          <option v-for="policyId in policyIds">{{ policyId }}</option>
-      </select-->
+      <label for="edit-policyIds">Policy ID:</label>
+
+      <li v-for="policyId in globalPolicyIds" style="list-style-type:none" >
+        <input type="checkbox" :value="policyId" id="edit-policyIds" v-model="user.policyIds" > {{policyId}}
+      </li>
+      <br>
+          <span>Checked names: {{ user.policyIds }}</span>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
     <router-link to="'/'" class="btn btn-default">Cancel</router-link>
@@ -170,7 +175,8 @@
 </template>
 
 
-<script src='node_modules/vue/dist/vue.js'></script>
+<script src="https://unpkg.com/vue"></script>
+
 <script src='node_modules/vue-router/dist/vue-router.js'></script>
 <script src="src/js/index.js"></script>
 </body>
